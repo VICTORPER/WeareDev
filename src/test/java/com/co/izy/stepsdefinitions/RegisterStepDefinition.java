@@ -2,10 +2,8 @@ package com.co.izy.stepsdefinitions;
 
 import com.co.izy.exceptions.MessageException;
 import com.co.izy.models.DataRegister;
-import com.co.izy.tasks.LoginTask;
 import com.co.izy.tasks.RegisterTask;
 import com.co.izy.utils.Constants;
-import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.screenplay.GivenWhenThen;

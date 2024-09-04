@@ -9,6 +9,7 @@ public class DataRegister {
     private String representative;
     private  String address;
     private String country;
+    private String city;
     private String region;
     private String phone;
     private  String email;
@@ -91,5 +92,13 @@ public class DataRegister {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

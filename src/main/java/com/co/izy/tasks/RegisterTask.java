@@ -8,7 +8,9 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Hit;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import org.openqa.selenium.Keys;
 
 public class RegisterTask implements Task {
     DataRegister dataRegister;
@@ -26,8 +28,10 @@ public class RegisterTask implements Task {
                 Enter.theValue(dataRegister.getCompanyname()).into(RegisterPage.TXT_COMPANYNAME),
                 Enter.theValue(dataRegister.getContactname()).into(RegisterPage.TXT_CONTACTNAME),
                 Enter.theValue(dataRegister.getContacttype()).into(RegisterPage.TXT_CONTACTTITLE),
-                //SelectFromOptions.byValue(dataRegister.getRepresentative()).from(RegisterPage.SELECTREPRESENTATIVE)
                 Enter.theValue(dataRegister.getAddress()).into(RegisterPage.TXT_ADRESS),
+                Enter.theValue(dataRegister.getRegion()).into(RegisterPage.TXT_REGION),
+                Enter.theValue(dataRegister.getPhone()).into(RegisterPage.TXT_PHONE),
+                Enter.theValue(dataRegister.getEmail()).into(RegisterPage.TXT_EMAIL),
                 Click.on((RegisterPage.BTN_SAVE))
         );
     }
