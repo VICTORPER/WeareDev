@@ -7,6 +7,8 @@ public class DataProduct {
     private String quantityperunit;
     private String priceunit;
     private String unitinstock;
+
+    private  String unitorder;
     private String reorderlevel;
     private String category;
     private  String supplier;
@@ -37,6 +39,14 @@ public class DataProduct {
 
     public String getUnitinstock() {
         return unitinstock;
+    }
+
+    public String getUnitorder() {
+        return unitorder;
+    }
+
+    public void setUnitorder(String unitorder) {
+        this.unitorder = unitorder;
     }
 
     public void setUnitinstock(String unitinstock) {

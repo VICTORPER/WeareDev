@@ -11,7 +11,7 @@ Feature: Register
 
 
     When he user enter de data for the register new product
-      | productname     | quantityperunit  | priceunit | unitinstock     | reorderlevel        | category      | supplier              |
-      | pruebavictr | 2 | 100000  | 50 | 10 | test | Adidas |
+      | productname     | quantityperunit  | priceunit | unitinstock     | unitorder |reorderlevel        | category      | supplier              |
+      | pruebavictr | 2 | 100000  | 50 | 10 | 12 | test |    Adidas                                                                                      |
 
     Then new product register succesfull

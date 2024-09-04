@@ -33,7 +33,7 @@ public class RegisterTask implements Task {
                 Enter.theValue(dataRegister.getRegion()).into(RegisterPage.TXT_REGION),
                 Enter.theValue(dataRegister.getPhone()).into(RegisterPage.TXT_PHONE),
                 Enter.theValue(dataRegister.getEmail()).into(RegisterPage.TXT_EMAIL),
-                Click.on((RegisterPage.BTN_SAVE))
+                Click.on((MenuComponent.BTN_SAVE))
         );
     }
 

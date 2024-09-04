@@ -26,8 +26,12 @@ public class ProductTask implements Task {
                 Click.on(MenuComponent.BTN_PRODUCT),
                 Click.on(MenuComponent.BTN_NEWPRODUCT),
                 Enter.theValue(product.getProductname()).into(ProductPage.TXT_PRODUCTNAME),
-
-                Click.on((RegisterPage.BTN_SAVE))
+                Enter.theValue(product.getQuantityperunit()).into(ProductPage.TXT_QUANTITY),
+                Enter.theValue(product.getPriceunit()).into(ProductPage.TXT_PRICEUNIT),
+                Enter.theValue(product.getUnitorder()).into(ProductPage.TXT_UNITORDER),
+                Enter.theValue(product.getUnitinstock()).into(ProductPage.TXT_UNITISTOCK),
+                Enter.theValue(product.getReorderlevel()).into(ProductPage.TXT_REORDERLEVEL),
+                Click.on((MenuComponent.BTN_SAVE))
         );
     }
 

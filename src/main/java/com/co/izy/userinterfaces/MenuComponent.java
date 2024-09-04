@@ -14,5 +14,7 @@ public class MenuComponent {
 
     public static final Target BTN_NEWPRODUCT= Target.the("click option new product Product").locatedBy("//span[@class='button-inner' and contains(., 'New Product')]");
 
+    public static final Target BTN_SAVE = Target.the("CLick on Bottom save").locatedBy("//span[text()='Save']");
+
 
 }

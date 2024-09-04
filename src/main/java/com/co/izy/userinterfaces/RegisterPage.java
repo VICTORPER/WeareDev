@@ -28,6 +28,5 @@ public class RegisterPage {
 
     public static final Target TXT_EMAIL = Target.the("Enter EMAIL").locatedBy("//input[@id='Serenity_Demo_Northwind_CustomerDialog9_Email']");
 
-    public static final Target BTN_SAVE = Target.the("CLick on Bottom save").locatedBy("//span[text()='Save']");
 
 }
