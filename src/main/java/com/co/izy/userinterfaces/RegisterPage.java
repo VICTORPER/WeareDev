@@ -4,11 +4,6 @@ import net.serenitybdd.screenplay.targets.Target;
 
 public class RegisterPage {
 
-    public  static final Target BTN_NORTHWIND = Target.the("click option NORTHWIND").locatedBy("//*[@id='nav_menu1_2']/li[1]/a/span");
-
-    public static final Target BTN_CUSTOMER= Target.the("click option customer").locatedBy("//ul[@id='nav_menu1_2_1']/li[1]/a/span");
-
-    public static final Target BTN_NEWCUSTOMER= Target.the("click option customer").locatedBy("//span[@class='button-inner' and contains(., 'New Customer')]");
 
     public static final Target TXT_CUSTOMERID = Target.the("Enter CustomerID").locatedBy("//input[@id='Serenity_Demo_Northwind_CustomerDialog9_CustomerID']");
 
