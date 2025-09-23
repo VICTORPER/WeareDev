@@ -1,46 +1,31 @@
 trigger:
-- main
+  - main   # Ejecuta el pipeline cuando hay cambios en la rama main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'   # Usa un agente gratuito en Linux
 
 steps:
-  # 1. Checkout del código
-  - task: Checkout@1
-    displayName: "Checkout del repositorio"
+  # Paso 1: Descargar código
+  - checkout: self
 
-  # 2. Configuración de Java
-  - task: UseJavaVersion@1
+  # Paso 2: Configurar Node.js
+  - task: UseNode@1
     inputs:
-      versionSpec: '11'
-      architecture: 'x64'
-    displayName: "Usar Java 11"
+      version: '18.x'   # Ajusta a la versión que uses
 
-  # 3. Ejecutar pruebas con Gradle (no falla el job si hay escenarios fallidos)
-  - task: Gradle@2
-    inputs:
-      workingDirectory: ''
-      gradleWrapperFile: 'gradlew'
-      gradleOptions: '-Xmx3072m'
-      tasks: 'clean test aggregate'
-      publishJUnitResults: false
-    continueOnError: true     # <--- evita que el pipeline se detenga
-    displayName: "Ejecutar pruebas con Gradle"
+  # Paso 3: Instalar dependencias
+  - script: |
+      npm install
+    displayName: 'Instalar dependencias'
 
-  # 4. Publicar resultados de pruebas en Azure (escenarios fallidos incluidos)
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFiles: '**/build/test-results/test/TEST-*.xml'
-      testRunTitle: 'Resultados de pruebas Cucumber/Serenity'
-      mergeTestResults: true
-    condition: succeededOrFailed()
-    displayName: "Publicar resultados de pruebas"
+  # Paso 4 (opcional): Compilar proyecto
+  - script: |
+      npm run build
+    displayName: 'Compilar proyecto'
 
-  # 5. Publicar Serenity Report como artefacto descargable
+  # Paso 5: Publicar artefacto
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: 'target/site/serenity'
-      ArtifactName: 'SerenityReport'
+      PathtoPublish: 'dist'        # Carpeta generada al compilar (ajusta si es build/, out/, etc.)
+      ArtifactName: 'drop'         # Nombre del artefacto
       publishLocation: 'Container'
-    condition: succeededOrFailed()
-    displayName: "Publicar reporte Serenity"
