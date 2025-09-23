@@ -1,0 +1,42 @@
+trigger:
+  - main   # Se ejecuta cuando haces push en main
+
+pool:
+  vmImage: 'ubuntu-latest'   # Agente Linux gratuito
+
+steps:
+  # Paso 1: Descargar código
+  - checkout: self
+
+  # Paso 2: Configurar Java
+  - task: UseJavaVersion@1
+    inputs:
+      versionSpec: '17'   # Ajusta a la versión que uses
+      jdkArchitecture: 'x64'
+
+  # Paso 3: Compilar y ejecutar pruebas con Gradle
+  - task: Gradle@2
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      tasks: 'clean test aggregate'   # aggregate genera reportes de Serenity
+
+  # Paso 4: Publicar resultados de pruebas
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/build/test-results/test/TEST-*.xml'
+      testRunTitle: 'Resultados de pruebas - Serenity BDD'
+
+  # Paso 5: Publicar reportes de Serenity
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'target/site/serenity'
+      ArtifactName: 'SerenityReports'
+      publishLocation: 'Container'
+
+  # Paso 6: Publicar artefacto de compilación (JAR/War)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'build/libs'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
