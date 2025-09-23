@@ -1,0 +1,43 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  # Paso 1: Descargar el código
+  - checkout: self
+
+  # Paso 2: Instalar Java 17 (o la versión que uses)
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
+  # Paso 3: Compilar y ejecutar pruebas con Gradle
+  - task: Gradle@2
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      tasks: 'clean test aggregate'
+
+  # Paso 4: Publicar resultados de pruebas JUnit
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/build/test-results/test/TEST-*.xml'
+      testRunTitle: 'Resultados de pruebas - Serenity BDD'
+
+  # Paso 5: Publicar reportes de Serenity
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'target/site/serenity'
+      ArtifactName: 'SerenityReports'
+      publishLocation: 'Container'
+
+  # Paso 6: Publicar artefacto de compilación (JAR generado)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'build/libs'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
